@@ -162,8 +162,7 @@ export class ChampSelections {
         })
 
       const image = new Image()
-      console.log(champion, champion.constructor.name.toLowerCase())
-      image.src = `champions/${champion.constructor.name.toLowerCase()}.webp`
+      image.src = `champions/${this.getChampionName(champion)}.webp`
       image.onload = () => {
         context.drawImage(image, coord.x + 4, coord.y + 4, coord.width - 8, coord.height - coord.fontSize * 2 + 4) // Champion
         context.fillStyle = 'white'
@@ -445,6 +444,10 @@ export class ChampSelections {
     context.restore()
   }
 
+  getChampionName = (champion: any) => {
+    return champion.name.toLowerCase().replace(' ', '').replace('-', '').replace('\'', '')
+  }
+
   drawBench = (canvas: HTMLCanvasElement, champion: any, hitboxCanvas: HTMLCanvasElement, hitboxColor: string, coord: { x: number, y: number, width: number, height: number, fontSize: number }) => {
     const context = canvas.getContext('2d') as CanvasRenderingContext2D
     const hitboxContext = hitboxCanvas.getContext('2d') as CanvasRenderingContext2D
@@ -452,7 +455,7 @@ export class ChampSelections {
 
     if (champion) {
       const image = new Image()
-      image.src = `icons/${champion.constructor.name.toLowerCase()}.webp`
+      image.src = `icons/${this.getChampionName(champion)}.webp`
       image.onload = () => {
         context.fillStyle = this.rarityColors[champion.rarity - 1]
         context.fillRect(coord.x, coord.y, coord.width, coord.height)
