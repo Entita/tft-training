@@ -162,6 +162,7 @@ export class ChampSelections {
         })
 
       const image = new Image()
+      console.log(champion, champion.constructor.name.toLowerCase())
       image.src = `champions/${champion.constructor.name.toLowerCase()}.webp`
       image.onload = () => {
         context.drawImage(image, coord.x + 4, coord.y + 4, coord.width - 8, coord.height - coord.fontSize * 2 + 4) // Champion
